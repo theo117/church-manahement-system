@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Church Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">C</div>
+        <div>
+          <p class="brand-title">ChurchFlow</p>
+          <p class="brand-subtitle">Management System</p>
+        </div>
+      </div>
+
+      <nav class="menu" aria-label="Main navigation">
+        <button class="menu-item active" data-view="dashboard">Dashboard</button>
+        <button class="menu-item" data-view="members">Members</button>
+        <button class="menu-item" data-view="attendance">Attendance</button>
+        <button class="menu-item" data-view="events">Events</button>
+        <button class="menu-item" data-view="donations">Donations</button>
+        <button class="menu-item" data-view="volunteers">Volunteers</button>
+        <button class="menu-item" data-view="communication">Communication</button>
+        <button class="menu-item" data-view="reports">Reports</button>
+        <button class="menu-item" data-view="settings">Settings</button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <p>Grace Church</p>
+        <small>FY 2026 Planning Mode</small>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-btn" id="menuToggle" aria-label="Toggle navigation">Menu</button>
+          <div>
+            <h1 id="viewTitle">Dashboard</h1>
+            <p id="viewSubtitle">Overview of church health and ministry activity</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <span class="badge" id="dataSourceBadge">Data: Mock</span>
+          <label class="search-wrap">
+            <span>Search</span>
+            <input type="search" id="globalSearch" placeholder="Find member, event, or note..." />
+          </label>
+          <button class="primary-btn" id="addRecordBtn">+ Add Record</button>
+        </div>
+      </header>
+
+      <section class="content-view active" data-view="dashboard">
+        <div class="kpi-grid" id="kpiGrid"></div>
+
+        <div class="two-col">
+          <article class="panel">
+            <div class="panel-head">
+              <h2>Weekly Attendance Trend</h2>
+              <span class="badge">Last 12 Weeks</span>
+            </div>
+            <div class="sparkline" id="attendanceSparkline" aria-label="Attendance trend chart"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-head">
+              <h2>Upcoming Events</h2>
+              <span class="badge">Next 30 Days</span>
+            </div>
+            <ul class="list" id="upcomingEvents"></ul>
+          </article>
+        </div>
+
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Prayer & Care Alerts</h2>
+            <span class="badge warning">Needs Follow-up</span>
+          </div>
+          <div class="cards" id="careAlerts"></div>
+        </article>
+      </section>
+
+      <section class="content-view" data-view="members">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Member Directory</h2>
+            <span class="badge">Live Filter</span>
+          </div>
+          <form class="crud-form" id="memberForm">
+            <input type="hidden" id="memberId" />
+            <input type="text" id="memberName" placeholder="Full name" required />
+            <select id="memberStatus" required>
+              <option value="active">Active</option>
+              <option value="new">New</option>
+              <option value="inactive">Inactive</option>
+            </select>
+            <input type="text" id="memberMinistry" placeholder="Ministry" required />
+            <input type="text" id="memberGroup" placeholder="Small group" required />
+            <input type="text" id="memberLastAttended" placeholder="Last attended (e.g., Feb 9)" required />
+            <button type="submit" class="primary-btn" id="memberSubmitBtn">Save Member</button>
+            <button type="button" class="icon-btn" id="memberCancelBtn">Cancel</button>
+          </form>
+          <div class="toolbar">
+            <input type="text" id="memberSearch" placeholder="Search by name, ministry, status" />
+            <select id="memberStatusFilter">
+              <option value="all">All Statuses</option>
+              <option value="active">Active</option>
+              <option value="new">New</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Status</th>
+                  <th>Ministry</th>
+                  <th>Small Group</th>
+                  <th>Last Attended</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="memberTableBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="content-view" data-view="attendance">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Attendance Check-In</h2>
+            <span class="badge">Service-Based</span>
+          </div>
+          <div class="cards" id="attendanceCards"></div>
+        </article>
+      </section>
+
+      <section class="content-view" data-view="events">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Event Management</h2>
+            <span class="badge">Calendar + Capacity</span>
+          </div>
+          <form class="crud-form" id="eventForm">
+            <input type="hidden" id="eventId" />
+            <input type="text" id="eventName" placeholder="Event name" required />
+            <input type="text" id="eventOwner" placeholder="Owner ministry" required />
+            <input type="number" id="eventProgress" placeholder="Progress %" min="0" max="100" required />
+            <input type="text" id="eventDate" placeholder="Date label (e.g., Mar 10)" required />
+            <input type="number" id="eventSeatsTaken" placeholder="Seats taken" min="0" required />
+            <input type="number" id="eventSeatsTotal" placeholder="Seats total" min="0" required />
+            <label class="checkline">
+              <input type="checkbox" id="eventUpcoming" />
+              Upcoming
+            </label>
+            <button type="submit" class="primary-btn" id="eventSubmitBtn">Save Event</button>
+            <button type="button" class="icon-btn" id="eventCancelBtn">Cancel</button>
+          </form>
+          <div class="cards" id="eventCards"></div>
+        </article>
+      </section>
+
+      <section class="content-view" data-view="donations">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Giving Overview</h2>
+            <span class="badge success">Year to Date</span>
+          </div>
+          <form class="crud-form" id="donationForm">
+            <input type="hidden" id="donationId" />
+            <input type="text" id="donationDonor" placeholder="Donor name" required />
+            <input type="text" id="donationFund" placeholder="Fund name" required />
+            <input type="number" id="donationAmount" placeholder="Amount (R)" min="0" step="1" required />
+            <input type="text" id="donationDate" placeholder="Date label (e.g., Feb 9)" required />
+            <button type="submit" class="primary-btn" id="donationSubmitBtn">Save Donation</button>
+            <button type="button" class="icon-btn" id="donationCancelBtn">Cancel</button>
+          </form>
+          <div class="split-grid">
+            <div id="fundProgress"></div>
+            <div class="table-wrap compact">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Donor</th>
+                    <th>Fund</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="donationTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="content-view" data-view="volunteers">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Volunteer Scheduling</h2>
+            <span class="badge">Rota Health</span>
+          </div>
+          <form class="crud-form" id="volunteerForm">
+            <input type="hidden" id="volunteerId" />
+            <input type="text" id="volunteerMessage" placeholder="Volunteer update message" required />
+            <button type="submit" class="primary-btn" id="volunteerSubmitBtn">Save Volunteer Update</button>
+            <button type="button" class="icon-btn" id="volunteerCancelBtn">Cancel</button>
+          </form>
+          <ul class="list" id="volunteerList"></ul>
+        </article>
+      </section>
+
+      <section class="content-view" data-view="communication">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Communication Center</h2>
+            <span class="badge">Email + SMS</span>
+          </div>
+          <form class="crud-form" id="communicationForm">
+            <input type="hidden" id="communicationId" />
+            <input type="text" id="communicationChannel" placeholder="Channel name" required />
+            <input type="text" id="communicationAudience" placeholder="Audience" required />
+            <input type="text" id="communicationStatus" placeholder="Status" required />
+            <button type="submit" class="primary-btn" id="communicationSubmitBtn">Save Communication</button>
+            <button type="button" class="icon-btn" id="communicationCancelBtn">Cancel</button>
+          </form>
+          <div class="cards" id="communicationCards"></div>
+        </article>
+      </section>
+
+      <section class="content-view" data-view="reports">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Reports Snapshot</h2>
+            <span class="badge">Board Ready</span>
+          </div>
+          <div class="cards" id="reportCards"></div>
+        </article>
+      </section>
+
+      <section class="content-view" data-view="settings">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>System Settings</h2>
+            <span class="badge">Configuration</span>
+          </div>
+          <form class="settings-grid">
+            <label>
+              Church Name
+              <input type="text" value="Grace Church" />
+            </label>
+            <label>
+              Main Contact Email
+              <input type="email" value="office@gracechurch.org" />
+            </label>
+            <label>
+              Default Service Day
+              <select>
+                <option>Sunday</option>
+                <option>Saturday</option>
+                <option>Friday</option>
+              </select>
+            </label>
+            <label>
+              Time Zone
+              <select>
+                <option>Africa/Johannesburg</option>
+                <option>Africa/Cape Town</option>
+                <option>Africa/Pretoria</option>
+              </select>
+            </label>
+            <label class="api-field">
+              API Base URL
+              <input type="url" id="apiBaseUrl" placeholder="http://localhost:8081/api" />
+            </label>
+            <div class="settings-actions">
+              <button type="button" class="primary-btn" id="saveSettingsBtn">Save Settings</button>
+              <button type="button" class="icon-btn" id="syncNowBtn">Sync Now</button>
+            </div>
+          </form>
+          <p class="muted-note" id="apiStatusText">API not connected yet. Mock data is active.</p>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
