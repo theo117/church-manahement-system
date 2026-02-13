@@ -341,7 +341,6 @@ function renderFundProgress() {
         <div class="fund-row">
           <div class="meta">
             <strong>${fund.name}</strong>
-            <span>${formatRand(raised)} / ${formatRand(goal)} (${percent}%)</span>
           </div>
           <div class="bar"><span style="width:${Math.min(percent, 100)}%;"></span></div>
         </div>`;
