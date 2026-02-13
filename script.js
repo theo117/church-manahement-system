@@ -1,64 +1,16 @@
 ﻿const mockData = {
-  kpis: [
-    { label: "Active Members", value: "1,284" },
-    { label: "Avg Weekly Attendance", value: "812" },
-    { label: "Monthly Giving", value: "R74,560" },
-    { label: "Active Volunteers", value: "214" }
-  ],
-  attendanceTrend: [62, 70, 68, 74, 73, 77, 84, 81, 79, 88, 86, 91],
-  upcomingEvents: [
-    { name: "Leadership Prayer Night", date: "Feb 14", seats: "48/80" },
-    { name: "Young Adults Gathering", date: "Feb 18", seats: "92/120" },
-    { name: "Community Food Drive", date: "Feb 22", seats: "130/150" },
-    { name: "Marriage Workshop", date: "Mar 01", seats: "58/100" }
-  ],
-  careAlerts: [
-    { title: "Hospital Visit Needed", text: "3 families requested pastoral visits this week." },
-    { title: "Bereavement Follow-up", text: "2 households require care team assignment." },
-    { title: "New Believer Mentorship", text: "7 new believers waiting for mentor matching." }
-  ],
-  members: [
-    { id: null, name: "Maria Johnson", status: "active", ministry: "Worship", group: "Hope Circle", lastAttended: "Feb 9" },
-    { id: null, name: "David Kim", status: "new", ministry: "Youth", group: "Ignite", lastAttended: "Feb 2" },
-    { id: null, name: "Anna Garcia", status: "inactive", ministry: "Outreach", group: "Bridge", lastAttended: "Dec 21" }
-  ],
-  attendance: [
-    { service: "Sunday 9:00 AM", checkedIn: 284, volunteers: 34 },
-    { service: "Sunday 11:00 AM", checkedIn: 339, volunteers: 38 },
-    { service: "Wednesday Bible Study", checkedIn: 154, volunteers: 18 }
-  ],
-  events: [
-    { id: null, name: "Easter Production", owner: "Creative Arts", progress: 64, eventDate: "Apr 05", seatsTaken: 0, seatsTotal: 0, upcoming: false },
-    { id: null, name: "Kids Camp", owner: "Children Ministry", progress: 48, eventDate: "Jun 12", seatsTaken: 0, seatsTotal: 0, upcoming: false },
-    { id: null, name: "Missions Weekend", owner: "Outreach", progress: 72, eventDate: "Jul 20", seatsTaken: 0, seatsTotal: 0, upcoming: false }
-  ],
-  donations: [
-    { id: null, donor: "Anonymous", fund: "General", amount: "R2,500", amountValue: 2500, date: "Feb 9" },
-    { id: null, donor: "L. Thompson", fund: "Missions", amount: "R1,200", amountValue: 1200, date: "Feb 9" },
-    { id: null, donor: "R. Patel", fund: "Building", amount: "R5,000", amountValue: 5000, date: "Feb 8" }
-  ],
-  funds: [
-    { name: "General Fund", raised: 165000, goal: 220000 },
-    { name: "Missions Fund", raised: 72000, goal: 100000 },
-    { name: "Building Fund", raised: 298000, goal: 450000 }
-  ],
-  volunteers: [
-    { id: null, message: "Worship Team: 5 positions unfilled for next 2 Sundays." },
-    { id: null, message: "Guest Services: 93% rota coverage this month." },
-    { id: null, message: "Children Check-In: background check renewal due for 4 workers." },
-    { id: null, message: "Production Team: training day scheduled for Feb 20." }
-  ],
-  communication: [
-    { id: null, channel: "Sunday Follow-up Email", audience: "All First-Time Guests", status: "Draft" },
-    { id: null, channel: "Volunteer Reminder SMS", audience: "Weekend Teams", status: "Scheduled" },
-    { id: null, channel: "Prayer Update Newsletter", audience: "Prayer Chain", status: "Sent" }
-  ],
-  reports: [
-    { title: "Membership Growth", value: "+8.4% YoY" },
-    { title: "Volunteer Retention", value: "87%" },
-    { title: "Giving Consistency", value: "72% recurring donors" },
-    { title: "Small Group Participation", value: "61% of adults" }
-  ]
+  kpis: [],
+  attendanceTrend: [],
+  upcomingEvents: [],
+  careAlerts: [],
+  members: [],
+  attendance: [],
+  events: [],
+  donations: [],
+  funds: [],
+  volunteers: [],
+  communication: [],
+  reports: []
 };
 
 const DEFAULT_API_BASE = "http://localhost:8081/api";
